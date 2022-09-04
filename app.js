@@ -8,8 +8,7 @@ const logger = require("morgan");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv").config();
 const session = require("express-session");
-const passport = require("passport");
-const { newLocalStrategy, deserializer, serializer } = require("./utils/auth");
+const passport = require("./service/auth");
 const router = require("./routes/routes");
 
 mongoose.connect(process.env.DB_CONNECTION, {
@@ -34,10 +33,6 @@ app.use(
 	})
 );
 
-passport.use(newLocalStrategy);
-passport.serializeUser(serializer);
-passport.deserializeUser(deserializer);
-
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -51,7 +46,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", router);
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
 	next(createError(404));
 });
 

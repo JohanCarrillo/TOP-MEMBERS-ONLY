@@ -51,7 +51,6 @@ const signUpPost = [
 			});
 			return;
 		} else {
-			console.log("before sign up", req.body);
 			hash(req.body.password, 10, (err, hashedPassword) => {
 				if (err) return next(err);
 				const user = new User({
@@ -66,7 +65,6 @@ const signUpPost = [
 					}
 					res.redirect("/");
 				});
-				console.log("after sign up", req.body);
 			});
 		}
 	},

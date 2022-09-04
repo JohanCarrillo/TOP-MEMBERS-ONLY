@@ -1,19 +1,20 @@
 "use strict";
 
 const User = require("../models/user");
-const passport = require("passport");
+const passport = require("../service/auth");
+const { body, validationResult } = require("express-validator");
 
 function logInGet(req, res, next) {
-	console.log(req.sessionID, req.session);
 	res.render("log-in");
 }
 
 function logInPost(req, res, next) {
-	console.log(req.sessionID, req.session);
 	passport.authenticate("local", {
 		successRedirect: "/",
 		failureRedirect: "/log-in",
-	});
+	})(req, res, next);
+	// aythenticate is a middleware function, if you dont pass it as midleware
+	// you have to manually call it by sending the req, res, next objects
 }
 
 function logOut(req, res) {

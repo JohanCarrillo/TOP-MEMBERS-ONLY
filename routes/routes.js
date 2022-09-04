@@ -5,6 +5,7 @@ const router = express.Router();
 const signUpController = require("../controllers/signUpController");
 const logInController = require("../controllers/logInController");
 const indexController = require("../controllers/index");
+const passport = require("../service/auth");
 
 router.get("/", indexController);
 
