@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Sign up</title>
+	</head>
+	<body>
+		<h1>Sign Up</h1>
+		<form action="" method="POST">
+			<label for="first_name">First name</label>
+			<input
+				name="first_name"
+				id="first-name"
+				type="text"
+				placeholder=""
+				value="<%= typeof user === 'undefined' ? '' : user.first_name%>"
+			/>
+			<label for="last_name">Last name</label>
+			<input
+				name="last_name"
+				id="last-name"
+				type="text"
+				placeholder=""
+				value="<%= typeof user === 'undefined' ? '' : user.last_name%>"
+			/>
+			<label for="email">Email</label>
+			<input
+				name="email"
+				id="email"
+				type="email"
+				placeholder=""
+				value="<%= typeof user === 'undefined' ? '' : user.email%>"
+			/>
+			<label for="password">Password</label>
+			<input name="password" id="password" type="password" />
+			<label for="password_confirmation">Confirm password</label>
+			<input
+				name="password_confirmation"
+				id="password-confirmation"
+				type="password"
+			/>
+			<button>Sign Up</button>
+		</form>
+
+		<% if (typeof errors !== 'undefined') { %>
+		<ul class="errors-list">
+			<% for (error of errors) { %>
+			<li class="error-item"><%= error.msg %></li>
+			<% } %>
+		</ul>
+		<% } %>
+	</body>
+</html>

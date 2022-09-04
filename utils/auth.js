@@ -2,7 +2,7 @@
 
 const { compare } = require("bcryptjs");
 const LocalStrategy = require("passport-local").Strategy;
-const User = require("../../models/user");
+const User = require("../models/user");
 
 const newLocalStrategy = new LocalStrategy((username, password, done) => {
 	// done(err, user)=>{}
@@ -24,6 +24,18 @@ const newLocalStrategy = new LocalStrategy((username, password, done) => {
 	});
 });
 
+const deserializer = (id, done) => {
+	User.findById(id, (err, user) => {
+		done(err, user);
+	});
+};
+
+const serializer = (user, done) => {
+	done(null, user.id);
+};
+
 module.exports = {
 	newLocalStrategy,
+	deserializer,
+	serializer,
 };

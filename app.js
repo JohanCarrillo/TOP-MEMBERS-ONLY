@@ -5,14 +5,14 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
-const mongoose = require("mmongoose");
+const mongoose = require("mongoose");
 const dotenv = require("dotenv").config();
 const session = require("express-session");
 const passport = require("passport");
-const { newLocalStrategy } = require("./utils/auth");
-const router = require("./routes/index");
+const { newLocalStrategy, deserializer, serializer } = require("./utils/auth");
+const router = require("./routes/routes");
 
-mongoose.connect(process.env.BD_CONNECTION, {
+mongoose.connect(process.env.DB_CONNECTION, {
 	useUnifiedTopology: true,
 	useNewUrlParser: true,
 });
@@ -35,16 +35,8 @@ app.use(
 );
 
 passport.use(newLocalStrategy);
-
-passport.serializeUser((user, done) => {
-	done(null, user.id);
-});
-
-passport.deserializeUser((id, done) => {
-	User.findById(id, (err, user) => {
-		done(err, user);
-	});
-});
+passport.serializeUser(serializer);
+passport.deserializeUser(deserializer);
 
 app.use(passport.initialize());
 app.use(passport.session());

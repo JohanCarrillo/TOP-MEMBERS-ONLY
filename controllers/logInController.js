@@ -1,18 +1,19 @@
 "use strict";
 
 const User = require("../models/user");
-const { authenticate } = require("passport");
+const passport = require("passport");
 
 function logInGet(req, res, next) {
+	console.log(req.sessionID, req.session);
 	res.render("log-in");
 }
 
 function logInPost(req, res, next) {
-	res.send(req.body);
-	// authenticate("local", {
-	// 	successRedirect: "/",
-	// 	failureRedirect: "/", // edit
-	// });
+	console.log(req.sessionID, req.session);
+	passport.authenticate("local", {
+		successRedirect: "/",
+		failureRedirect: "/log-in",
+	});
 }
 
 function logOut(req, res) {
