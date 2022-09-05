@@ -12,7 +12,7 @@ router.get("/", indexController);
 router.get("/sign-up", signUpController.signUpGet);
 router.post("/sign-up", signUpController.signUpPost);
 
-router.get("log-out", logInController.logOut);
+router.get("/log-out", logInController.logOut);
 
 router.get("/log-in", logInController.logInGet);
 router.post("/log-in", logInController.logInPost);

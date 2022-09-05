@@ -13,5 +13,11 @@
 			<input name="password" id="password" type="password" />
 			<button>Log In</button>
 		</form>
+
+		<% if(typeof error !== 'undefined') { %>
+		<ul>
+			<li><%= error.message %></li>
+		</ul>
+		<% } %>
 	</body>
 </html>

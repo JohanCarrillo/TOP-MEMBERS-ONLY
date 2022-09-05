@@ -5,7 +5,16 @@
 		<link rel="stylesheet" href="/stylesheets/style.css" />
 	</head>
 	<body>
-		<header id="header">Header</header>
+		<header id="header">
+			<% if(typeof user === 'undefined') { %>
+			<button id="log-in"><a href="/log-in"> Log In </a></button>
+			<button id="sign-up"><a href="/sign-up"> Sign-up </a></button>
+			<% } else { %>
+			<div>Welcome <%= user.first_name %> !</div>
+			<button id="log-out"><a href="/log-out"> Log out </a></button>
+			<button><a href="/profile"> Profile </a></button>
+			<% } %>
+		</header>
 
 		<div id="content-box">
 			<h1><%= title %></h1>

@@ -9,9 +9,16 @@ function logInGet(req, res, next) {
 }
 
 function logInPost(req, res, next) {
-	passport.authenticate("local", {
-		successRedirect: "/",
-		failureRedirect: "/log-in",
+	passport.authenticate("local", { successRedirect: "/" }, (err, user, msg) => {
+		console.log(err, user, msg);
+		if (err) return next(err);
+		if (!user) {
+			return res.render("log-in", { error: msg });
+		}
+		req.logIn(user, err => {
+			if (err) return next(err);
+			return res.redirect("/");
+		});
 	})(req, res, next);
 	// aythenticate is a middleware function, if you dont pass it as midleware
 	// you have to manually call it by sending the req, res, next objects
