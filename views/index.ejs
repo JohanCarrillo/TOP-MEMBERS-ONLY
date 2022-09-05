@@ -13,14 +13,20 @@
 			<div>Welcome <%= user.first_name %> !</div>
 			<button id="log-out"><a href="/log-out"> Log out </a></button>
 			<button><a href="/profile"> Profile </a></button>
-			<% } %>
+			<% if(user.membership_status === 'free') { %>
+			<button><a href="/change-status"> Become a member </a></button>
+			<% } else { %>
+			<div>Your a member, nice!</div>
+			<% } %> <% } %>
 		</header>
 
 		<div id="content-box">
 			<h1><%= title %></h1>
 			<div id="main-block">
 				<div id="messages-menu">
-					<button id="create-message">New message</button>
+					<button id="create-message">
+						<a href="/message/new">New message</a>
+					</button>
 				</div>
 				<% if( typeof messages === 'undefined' || messages.length <= 0) { %>
 				<div>There are no messages yet. Go write one!</div>
@@ -29,18 +35,25 @@
 					<ul>
 						<% for(message of messages) { %>
 						<li class="message-container">
+							<% if(typeof user !== 'undefined' && typeof user !== 'null' &&
+							user.membership_status === 'admin') { %>
+							<button>
+								<a href="/message/delete/:<%=message.id%>">Delete message</a>
+							</button>
+							<% } %>
 							<div id="message-updated">
 								updated last time in <%= message.updatedAt %>
 							</div>
-							<div id="message-title">message.title</div>
-							<div id="message-text">message.text</div>
-							<% if(typeof user !== 'undefined' && typeof user !== 'null') { %>
+							<div id="message-title"><strong><%=message.title%></strong></div>
+							<div id="message-text"><%=message.text%></div>
+							<% if(typeof user !== 'undefined' && typeof user !== 'null' &&
+							user.membership_status !== 'free') { %>
 							<div id="message-created">
 								created by <strong><%= message.user.first_name %></strong> in
 								<%= message.createdAt %>
 							</div>
 							<% } else { %>
-							<div>Log-in to see who posted this message</div>
+							<div>Become a member to see who posted this message</div>
 							<% } %> <% } %>
 						</li>
 					</ul>

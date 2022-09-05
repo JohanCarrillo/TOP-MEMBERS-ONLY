@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>New Message</title>
+	</head>
+	<body>
+		<h1>New Message</h1>
+		<form action="" method="POST">
+			<label for="title">Title</label>
+			<input 
+				name="title" 
+				id="message-title" 
+				placeholder="" 
+				type="text" 
+				required="true" 
+				value="<%= typeof message === 'undefined' ? '' : message.title %>" />
+			<label for="text">Message</label>
+			<input 
+				name="text" 
+				id="message-text" 
+				placeholder="" 
+				type="text" 
+				required="true" 
+				value="<%= typeof message === 'undefined' ? '' : message.text %>" />
+			<input type="submit">Send</input>
+		</form>
+
+		<% if(typeof errors !== 'undefined') { %>
+		<ul>
+			<% for(let i=0; i<errors.length; i++) { %>
+				<li><%= errors[i].message %></li>
+			<% } %>
+		</ul>
+		<% } %>
+	</body>
+</html>

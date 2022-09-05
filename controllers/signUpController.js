@@ -38,7 +38,6 @@ const signUpPost = [
 
 	(req, res, next) => {
 		const errors = validationResult(req);
-		console.log(errors.array());
 		if (!errors.isEmpty()) {
 			const user = {
 				first_name: req.body.first_name,

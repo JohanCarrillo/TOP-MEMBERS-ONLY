@@ -13,7 +13,8 @@
 				id="first-name"
 				type="text"
 				placeholder=""
-				value="<%= typeof user === 'undefined' ? '' : user.first_name%>"
+				value="<%= typeof user === 'undefined' ? '' : user.first_name%>" 
+				required="true"
 			/>
 			<label for="last_name">Last name</label>
 			<input
@@ -22,6 +23,7 @@
 				type="text"
 				placeholder=""
 				value="<%= typeof user === 'undefined' ? '' : user.last_name%>"
+				required="true"
 			/>
 			<label for="email">Email</label>
 			<input
@@ -30,6 +32,7 @@
 				type="email"
 				placeholder=""
 				value="<%= typeof user === 'undefined' ? '' : user.email%>"
+				required="true"
 			/>
 			<label for="password">Password</label>
 			<input name="password" id="password" type="password" />
@@ -38,8 +41,9 @@
 				name="password_confirmation"
 				id="password-confirmation"
 				type="password"
+				required="true"
 			/>
-			<button>Sign Up</button>
+			<input type="submit">Sign Up</input>
 		</form>
 
 		<% if (typeof errors !== 'undefined') { %>
