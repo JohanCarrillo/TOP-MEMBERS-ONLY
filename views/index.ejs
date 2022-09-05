@@ -18,7 +18,35 @@
 
 		<div id="content-box">
 			<h1><%= title %></h1>
-			<p>Content</p>
+			<div id="main-block">
+				<div id="messages-menu">
+					<button id="create-message">New message</button>
+				</div>
+				<% if( typeof messages === 'undefined' || messages.length <= 0) { %>
+				<div>There are no messages yet. Go write one!</div>
+				<% } else { %>
+				<div id="messages-container">
+					<ul>
+						<% for(message of messages) { %>
+						<li class="message-container">
+							<div id="message-updated">
+								updated last time in <%= message.updatedAt %>
+							</div>
+							<div id="message-title">message.title</div>
+							<div id="message-text">message.text</div>
+							<% if(typeof user !== 'undefined' && typeof user !== 'null') { %>
+							<div id="message-created">
+								created by <strong><%= message.user.first_name %></strong> in
+								<%= message.createdAt %>
+							</div>
+							<% } else { %>
+							<div>Log-in to see who posted this message</div>
+							<% } %> <% } %>
+						</li>
+					</ul>
+				</div>
+				<% } %>
+			</div>
 		</div>
 
 		<Footer id="footer">Footer</Footer>
