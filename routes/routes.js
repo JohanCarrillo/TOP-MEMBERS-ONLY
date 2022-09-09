@@ -35,6 +35,7 @@ router.get(
 	userIsAdmin,
 	messageController.deleteMessageGet
 );
+
 router.post(
 	"/message/delete/:id",
 	userIsAdmin,

@@ -7,23 +7,25 @@
 	<body>
 		<h1>New Message</h1>
 		<form action="" method="POST">
-			<label for="title">Title</label>
-			<input 
-				name="title" 
-				id="message-title" 
-				placeholder="" 
-				type="text" 
-				required="true" 
-				value="<%= typeof message === 'undefined' ? '' : message.title %>" />
-			<label for="text">Message</label>
-			<input 
-				name="text" 
-				id="message-text" 
-				placeholder="" 
-				type="text" 
-				required="true" 
-				value="<%= typeof message === 'undefined' ? '' : message.text %>" />
-			<input type="submit">Send</input>
+			<div id="form-container">
+				<label for="title">Title</label>
+				<input 
+					name="title" 
+					id="message-title" 
+					placeholder="" 
+					type="text" 
+					required="true" 
+					value="<%= typeof message === 'undefined' ? '' : message.title %>" />
+				<label for="text">Message</label>
+				<input 
+					name="text" 
+					id="message-text" 
+					placeholder="" 
+					type="text" 
+					required="true" 
+					value="<%= typeof message === 'undefined' ? '' : message.text %>" />
+				<button type="submit">Send</button>
+			</div>
 		</form>
 
 		<% if(typeof errors !== 'undefined') { %>

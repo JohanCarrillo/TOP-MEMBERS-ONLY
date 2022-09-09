@@ -12,11 +12,15 @@
 			<% } else { %>
 			<div>Welcome <%= user.first_name %> !</div>
 			<button id="log-out"><a href="/log-out"> Log out </a></button>
-			<button><a href="/profile"> Profile </a></button>
+			<!-- <button><a href="/profile"> Profile </a></button> -->
 			<% if(user.membership_status === 'free') { %>
 			<button><a href="/change-status"> Become a member </a></button>
 			<% } else { %>
-			<div>Your a member, nice!</div>
+			<div>
+				You are a <%=user.membership_status%>, nice! <%
+				if(user.membership_status === 'member') { %> Can you
+				<a href="/change-status"> become an admin</a> ? <% } %>
+			</div>
 			<% } %> <% } %>
 		</header>
 
@@ -38,11 +42,11 @@
 							<% if(typeof user !== 'undefined' && typeof user !== 'null' &&
 							user.membership_status === 'admin') { %>
 							<button>
-								<a href="/message/delete/:<%=message.id%>">Delete message</a>
+								<a href="/message/delete/:<%=message._id%>">Delete message</a>
 							</button>
 							<% } %>
 							<div id="message-updated">
-								updated last time in <%= message.updatedAt %>
+								updated last time in <%= message.updatedAt.toISOString() %>
 							</div>
 							<div id="message-title"><strong><%=message.title%></strong></div>
 							<div id="message-text"><%=message.text%></div>
@@ -50,7 +54,7 @@
 							user.membership_status !== 'free') { %>
 							<div id="message-created">
 								created by <strong><%= message.user.first_name %></strong> in
-								<%= message.createdAt %>
+								<%= message.createdAt.toISOString() %>
 							</div>
 							<% } else { %>
 							<div>Become a member to see who posted this message</div>

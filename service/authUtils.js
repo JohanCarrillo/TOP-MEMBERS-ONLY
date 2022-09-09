@@ -10,7 +10,7 @@ function userIsAuth(req, res, next) {
 }
 
 function userIsMember(req, res, next) {
-	if (req.user.membership_status !== "member") {
+	if (req.user.membership_status === "free") {
 		return res.redirect("/log-in");
 		// return res.status(403).render("forbidden");
 	} else {

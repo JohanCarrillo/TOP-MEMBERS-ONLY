@@ -32,6 +32,7 @@ const createMessagePost = [
 				if (err) {
 					return next(err);
 				}
+				console.log("message created");
 				return res.redirect("/");
 			});
 		}
@@ -39,11 +40,22 @@ const createMessagePost = [
 ];
 
 function deleteMessageGet(req, res, next) {
-	res.send("page in construction");
+	console.log("delete controller of id: ", req.params.id);
+	Message.findById(req.params.id.substring(1))
+		.populate("user")
+		.exec((err, message) => {
+			if (err) return next(err);
+			if (message == null) res.redirect("/");
+			return res.render("delete-message", { message: message });
+		});
 }
 
 function deleteMessagePost(req, res, next) {
-	res.send("page in construction");
+	Message.findByIdAndRemove(req.body.id, err => {
+		if (err) return next(err);
+		console.log("message deleted");
+		return res.redirect("/");
+	});
 }
 
 module.exports = {

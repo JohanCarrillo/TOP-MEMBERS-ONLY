@@ -13,7 +13,7 @@
 				id="first-name"
 				type="text"
 				placeholder=""
-				value="<%= typeof user === 'undefined' ? '' : user.first_name%>" 
+				value="<%= typeof user === 'undefined' ? '' : user.first_name%>"
 				required="true"
 			/>
 			<label for="last_name">Last name</label>
@@ -43,7 +43,7 @@
 				type="password"
 				required="true"
 			/>
-			<input type="submit">Sign Up</input>
+			<button type="submit">Sign Up</button>
 		</form>
 
 		<% if (typeof errors !== 'undefined') { %>

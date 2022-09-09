@@ -8,10 +8,16 @@
 		<h1>Log In</h1>
 		<form action="" method="POST">
 			<label for="email">Email</label>
-			<input name="email" id="email" placeholder="" type="email" required="true" />
+			<input
+				name="email"
+				id="email"
+				placeholder=""
+				type="email"
+				required="true"
+			/>
 			<label for="password">Password</label>
 			<input name="password" id="password" type="password" required="true" />
-			<input type="submit">Log In</input>
+			<button type="submit">Log In</button>
 		</form>
 
 		<% if(typeof error !== 'undefined') { %>
