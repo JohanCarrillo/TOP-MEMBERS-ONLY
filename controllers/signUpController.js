@@ -3,9 +3,9 @@
 const User = require("../models/user");
 const { hash } = require("bcryptjs");
 const { body, validationResult } = require("express-validator");
+const { logInPost } = require("./logInController");
 
 function signUpGet(req, res, next) {
-	console.log(typeof user === "undefined");
 	res.render("sign-up");
 }
 
@@ -43,6 +43,7 @@ const signUpPost = [
 				first_name: req.body.first_name,
 				last_name: req.body.last_name,
 				email: req.body.email,
+				valid: false, // thi is to tell the render engine that the user is invalid so the header dot change
 			};
 			res.render("sign-up", {
 				user: user,
@@ -62,7 +63,8 @@ const signUpPost = [
 					if (err) {
 						return next(err);
 					}
-					res.redirect("/");
+					logInPost(req, res, next);
+					return;
 				});
 			});
 		}

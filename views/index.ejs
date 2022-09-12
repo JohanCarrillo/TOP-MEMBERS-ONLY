@@ -2,30 +2,42 @@
 <html>
 	<head>
 		<title><%= title %></title>
-		<link rel="stylesheet" href="/stylesheets/style.css" />
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+		/>
+		<link rel="stylesheet" href="/stylesheets/style-index.css" />
 	</head>
 	<body>
 		<header id="header">
-			<% if(typeof user === 'undefined') { %>
-			<button id="log-in"><a href="/log-in"> Log In </a></button>
-			<button id="sign-up"><a href="/sign-up"> Sign-up </a></button>
-			<% } else { %>
-			<div>Welcome <%= user.first_name %> !</div>
-			<button id="log-out"><a href="/log-out"> Log out </a></button>
-			<!-- <button><a href="/profile"> Profile </a></button> -->
-			<% if(user.membership_status === 'free') { %>
-			<button><a href="/change-status"> Become a member </a></button>
-			<% } else { %>
-			<div>
-				You are a <%=user.membership_status%>, nice! <%
-				if(user.membership_status === 'member') { %> Can you
-				<a href="/change-status"> become an admin</a> ? <% } %>
+			<button id="home-button"><a href="/">Home</a></button>
+			<div id="header-items-container">
+				<% if(typeof user === 'undefined') { %>
+				<button id="log-in"><a href="/log-in"> Log In </a></button>
+				<button id="sign-up"><a href="/sign-up"> Sign-up </a></button>
+				<% } else { %>
+				<button id="log-out"><a href="/log-out"> Log out </a></button>
+				<!-- <button><a href="/profile"> Profile </a></button> -->
+				<% if(user.membership_status === 'free') { %>
+				<button><a href="/change-status"> Become a member </a></button>
+				<% } else if(user.membership_status === 'member') { %>
+				<button><a href="/change-status"> Become an admin</a></button>
+				<% } %> <% } %>
 			</div>
-			<% } %> <% } %>
 		</header>
 
 		<div id="content-box">
-			<h1><%= title %></h1>
+			<h1 style="text-align: center"><%= title %></h1>
+			<% if(typeof user !== 'undefined') { %>
+			<div style="font-size: 16px">
+				Welcome <strong><%= user.first_name %> !</strong>
+			</div>
+			<% } else { %>
+			<div style="font-size: 16px">
+				<a href="/sign-up">Sign up</a> or <a href="/log-in">Log in</a> to post a
+				new message
+			</div>
+			<% } %>
 			<div id="main-block">
 				<div id="messages-menu">
 					<button id="create-message">
@@ -38,26 +50,33 @@
 				<div id="messages-container">
 					<ul>
 						<% for(message of messages) { %>
-						<li class="message-container">
+						<li class="message">
 							<% if(typeof user !== 'undefined' && typeof user !== 'null' &&
 							user.membership_status === 'admin') { %>
 							<button>
 								<a href="/message/delete/:<%=message._id%>">Delete message</a>
 							</button>
 							<% } %>
-							<div id="message-updated">
+							<div id="message-updated" style="font-size: 11px">
 								updated last time in <%= message.updatedAt.toISOString() %>
 							</div>
-							<div id="message-title"><strong><%=message.title%></strong></div>
+							<div
+								id="message-title"
+								style="font-size: 16px; color: blueviolet"
+							>
+								<strong><%=message.title%></strong>
+							</div>
 							<div id="message-text"><%=message.text%></div>
 							<% if(typeof user !== 'undefined' && typeof user !== 'null' &&
 							user.membership_status !== 'free') { %>
-							<div id="message-created">
+							<div id="message-created" style="font-size: 11px">
 								created by <strong><%= message.user.first_name %></strong> in
 								<%= message.createdAt.toISOString() %>
 							</div>
 							<% } else { %>
-							<div>Become a member to see who posted this message</div>
+							<div style="font-size: 10px">
+								<i>Become a member to see who posted this message</i>
+							</div>
 							<% } %> <% } %>
 						</li>
 					</ul>
@@ -66,6 +85,9 @@
 			</div>
 		</div>
 
-		<Footer id="footer">Footer</Footer>
+		<Footer id="footer">
+			<i class="fa fa-github" style="color: white; font-size: 22px"></i>
+			JohanCarrillo
+		</Footer>
 	</body>
 </html>

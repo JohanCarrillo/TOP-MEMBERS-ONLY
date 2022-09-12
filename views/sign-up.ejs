@@ -3,55 +3,96 @@
 	<head>
 		<meta charset="UTF-8" />
 		<title>Sign up</title>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+		/>
+		<link rel="stylesheet" href="/stylesheets/style-form.css" />
 	</head>
 	<body>
-		<h1>Sign Up</h1>
-		<form action="" method="POST">
-			<label for="first_name">First name</label>
-			<input
-				name="first_name"
-				id="first-name"
-				type="text"
-				placeholder=""
-				value="<%= typeof user === 'undefined' ? '' : user.first_name%>"
-				required="true"
-			/>
-			<label for="last_name">Last name</label>
-			<input
-				name="last_name"
-				id="last-name"
-				type="text"
-				placeholder=""
-				value="<%= typeof user === 'undefined' ? '' : user.last_name%>"
-				required="true"
-			/>
-			<label for="email">Email</label>
-			<input
-				name="email"
-				id="email"
-				type="email"
-				placeholder=""
-				value="<%= typeof user === 'undefined' ? '' : user.email%>"
-				required="true"
-			/>
-			<label for="password">Password</label>
-			<input name="password" id="password" type="password" />
-			<label for="password_confirmation">Confirm password</label>
-			<input
-				name="password_confirmation"
-				id="password-confirmation"
-				type="password"
-				required="true"
-			/>
-			<button type="submit">Sign Up</button>
-		</form>
+		<header id="header">
+			<button id="home-button"><a href="/">Home</a></button>
+			<div id="header-items-container">
+				<% if(typeof user === 'undefined' || user.valid === false) { %>
+				<button id="log-in"><a href="/log-in"> Log In </a></button>
+				<button id="sign-up"><a href="/sign-up"> Sign-up </a></button>
+				<% } else { %> <%console.log(user)%>
+				<button id="log-out"><a href="/log-out"> Log out </a></button>
+				<!-- <button><a href="/profile"> Profile </a></button> -->
+				<% if(user.membership_status === 'free') { %>
+				<button><a href="/change-status"> Become a member </a></button>
+				<% } else if(user.membership_status === 'member') { %>
+				<button><a href="/change-status"> Become an admin</a></button>
+				<% } %> <% } %>
+			</div>
+		</header>
 
-		<% if (typeof errors !== 'undefined') { %>
-		<ul class="errors-list">
-			<% for (error of errors) { %>
-			<li class="error-item"><%= error.msg %></li>
+		<div id="content-box">
+			<h1 style="text-align: center">Sign Up</h1>
+			<form action="" method="POST">
+				<div class="input-container">
+					<label for="first_name">First name </label>
+					<input
+						name="first_name"
+						id="first-name"
+						type="text"
+						placeholder=""
+						value="<%= typeof user === 'undefined' ? '' : user.first_name%>"
+						required="true"
+					/>
+				</div>
+				<div class="input-container">
+					<label for="last_name">Last name </label>
+					<input
+						name="last_name"
+						id="last-name"
+						type="text"
+						placeholder=""
+						value="<%= typeof user === 'undefined' ? '' : user.last_name%>"
+						required="true"
+					/>
+				</div>
+				<div class="input-container">
+					<label for="email">Email </label>
+					<input
+						name="email"
+						id="email"
+						type="email"
+						placeholder=""
+						value="<%= typeof user === 'undefined' ? '' : user.email%>"
+						required="true"
+					/>
+				</div>
+				<div class="input-container">
+					<label for="password">Password </label>
+					<input name="password" id="password" type="password" />
+				</div>
+				<div class="input-container">
+					<label for="password_confirmation">Confirm password </label>
+					<input
+						name="password_confirmation"
+						id="password-confirmation"
+						type="password"
+						required="true"
+					/>
+				</div>
+				<div class="input-container">
+					<button type="submit">Sign Up</button>
+				</div>
+			</form>
+
+			<% if (typeof errors !== 'undefined') { %>
+			<ul id="errors-list">
+				<% for (error of errors) { %>
+				<li class="error-item"><%= error.msg %></li>
+				<% } %>
+			</ul>
 			<% } %>
-		</ul>
-		<% } %>
+		</div>
+
+		<Footer id="footer">
+			<i class="fa fa-github" style="color: white; font-size: 22px"></i>
+			JohanCarrillo
+		</Footer>
 	</body>
 </html>

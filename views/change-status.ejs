@@ -2,14 +2,46 @@
 <html>
 	<head>
 		<title>Change Status</title>
-		<link rel="stylesheet" href="/stylesheets/style.css" />
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+		/>
+		<link rel="stylesheet" href="/stylesheets/style-form.css" />
 	</head>
 	<body>
-		<h1>Change Membership Status</h1>
-		<form action="" method="POST">
-			<label for="secret_key"> Enter key </label>
-			<input name="secret_key" id="membership-key" placeholder="" type="password" required="true" />
-			<input type="submit"></input>
-		</form>
+		<header id="header">
+			<button id="home-button"><a href="/">Home</a></button>
+			<div id="header-items-container">
+				<% if(typeof user === 'undefined' || user.valid === false) { %>
+				<button id="log-in"><a href="/log-in"> Log In </a></button>
+				<button id="sign-up"><a href="/sign-up"> Sign-up </a></button>
+				<% } else { %>
+				<button id="log-out"><a href="/log-out"> Log out </a></button>
+				<!-- <button><a href="/profile"> Profile </a></button> -->
+				<% if(user.membership_status === 'free') { %>
+				<button><a href="/change-status"> Become a member </a></button>
+				<% } else if(user.membership_status === 'member') { %>
+				<button><a href="/change-status"> Become an admin</a></button>
+				<% } %> <% } %>
+			</div>
+		</header>
+
+		<div id="content-box">
+			<h1 style="text-align: center;">Change Membership Status</h1>
+			<form action="" method="POST">
+				<div class="input-container">
+					<label for="secret_key"> Enter key </label>
+					<input name="secret_key" id="membership-key" placeholder="" type="password" required="true" />
+				</div>
+				<div class="input-container">
+					<input type="submit"></input>
+				</div>
+			</form>
+		</div>
+
+		<Footer id="footer">
+			<i class="fa fa-github" style="color: white; font-size: 22px"></i>
+			JohanCarrillo
+		</Footer>
 	</body>
 </html>

@@ -10,7 +10,7 @@ function logInGet(req, res, next) {
 
 function logInPost(req, res, next) {
 	passport.authenticate("local", { successRedirect: "/" }, (err, user, msg) => {
-		console.log(err, user, msg);
+		// console.log(err, user, msg);
 		if (err) return next(err);
 		if (!user) {
 			return res.render("log-in", { error: msg });

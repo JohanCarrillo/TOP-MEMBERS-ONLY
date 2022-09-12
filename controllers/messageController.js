@@ -4,7 +4,7 @@ const Message = require("../models/message");
 const { body, validationResult } = require("express-validator");
 
 function createMessageGet(req, res, next) {
-	res.render("create-message");
+	res.render("create-message", { user: req.user });
 }
 
 const createMessagePost = [
@@ -20,6 +20,7 @@ const createMessagePost = [
 			};
 			res.render("create-message", {
 				message: message,
+				user: req.user,
 				errors: errors.array(),
 			});
 			return;
@@ -46,7 +47,7 @@ function deleteMessageGet(req, res, next) {
 		.exec((err, message) => {
 			if (err) return next(err);
 			if (message == null) res.redirect("/");
-			return res.render("delete-message", { message: message });
+			return res.render("delete-message", { message: message, user: req.user });
 		});
 }
 

@@ -3,22 +3,53 @@
 	<head>
 		<meta charset="UTF-8" />
 		<title>Delete Message</title>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+		/>
+		<link rel="stylesheet" href="/stylesheets/style-form.css" />
 	</head>
 	<body>
-		<h1>Delete Message: <%=message.title%></h1>
-
-		<div>Do you really want to delete this message?</div>
-
-		<form method="POST" action="">
-			<div id="form-container">
-				<input
-					type="hidden"
-					name="id"
-					required="true"
-					value="<%=message.id%>"
-				/>
-				<button type="submit">Delete</button>
+		<header id="header">
+			<button id="home-button"><a href="/">Home</a></button>
+			<div id="header-items-container">
+				<% if(typeof user === 'undefined' || user.valid === false) { %>
+				<button id="log-in"><a href="/log-in"> Log In </a></button>
+				<button id="sign-up"><a href="/sign-up"> Sign-up </a></button>
+				<% } else { %>
+				<button id="log-out"><a href="/log-out"> Log out </a></button>
+				<!-- <button><a href="/profile"> Profile </a></button> -->
+				<% if(user.membership_status === 'free') { %>
+				<button><a href="/change-status"> Become a member </a></button>
+				<% } else if(user.membership_status === 'member') { %>
+				<button><a href="/change-status"> Become an admin</a></button>
+				<% } %> <% } %>
 			</div>
-		</form>
+		</header>
+
+		<div id="content-box">
+			<h1 style="text-align: center">Delete Message: <%=message.title%></h1>
+			<div style="text-align: center">
+				Do you really want to delete this message?
+			</div>
+			<form method="POST" action="">
+				<div class="input-container">
+					<input
+						type="hidden"
+						name="id"
+						required="true"
+						value="<%=message.id%>"
+					/>
+				</div>
+				<div class="input-container">
+					<button type="submit">Delete</button>
+				</div>
+			</form>
+		</div>
+
+		<Footer id="footer">
+			<i class="fa fa-github" style="color: white; font-size: 22px"></i>
+			JohanCarrillo
+		</Footer>
 	</body>
 </html>
