@@ -7,7 +7,7 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv").config();
-const session = require("express-session");
+const session = require("cookie-session");
 const passport = require("./service/auth");
 const router = require("./routes/routes");
 
