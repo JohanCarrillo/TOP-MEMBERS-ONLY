@@ -30,6 +30,7 @@ function logOut(req, res) {
 		if (err) {
 			return next(err);
 		}
+		req.logout();
 		res.redirect("/");
 	});
 }
