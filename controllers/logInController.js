@@ -25,7 +25,8 @@ function logInPost(req, res, next) {
 }
 
 function logOut(req, res) {
-	req.logout(function (err) {
+	// req.logout(function (err) {
+	req.session.destroy(function (err) {
 		if (err) {
 			return next(err);
 		}
